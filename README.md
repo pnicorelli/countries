@@ -33,6 +33,10 @@ It fetch data from:
 ### Generate JSON
 
 ```Shell
+git clone https://github.com/pnicorelli/countries.git
+cd countries
+git submodule init
+git submodule update --recursive
 npm install
 npm start
 ```

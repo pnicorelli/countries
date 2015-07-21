@@ -21,7 +21,7 @@ return promise.then( function(filename){
     return pictures.createPics(data);
 }).then( function( data ){
     process.stdout.write("* Flag created for "+data.length+" countries                \n");
-    fs.writeFile('./build/a.json', JSON.stringify( data ), function(err){
+    fs.writeFile('./build/countries.json', JSON.stringify( data ), function(err){
         if(err) throw err;
         process.stdout.write("* Data saved\n");
     });
