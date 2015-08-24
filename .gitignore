@@ -1,4 +1,3 @@
-build/*
 !build/.placeholder
 node_modules
 .log
