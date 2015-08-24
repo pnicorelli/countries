@@ -1,76 +1,105 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="">
     function buildBox(x){
-        var html = '<div class="box">';
-        html = html + '<div class="row name">'+x['name']+ '</div>';
-        html = html + '<div class="row">'+ '<img src="' + x.images.svg+'">'+ '';
-        html = html + '<div><b>alpha2:</b> '+ x['alpha2']+ '<br><b>alpha3:</b> '+ x['alpha3']+ '</div></div>';
-        html = html + '<div class="row"><b>Currency:</b> '+x['currency']+ '</div>';
-        html = html + '<div class="row"><b>Phone Prefix:</b> '+x['prefix']+ '</div>';
+        var html = '<div class="box media thumbnail">';
+
+        html = html + '<div class="media-left">';
+        html = html + '<img src="' + x.images.svg_square+'"><img src="' + x.images.svg+'"></div>';
+        html = html + '<div class="media-right"><h3>'+x['name']+ '</h3>';
+        html = html + '<p><b>alpha2:</b> '+ x['alpha2']+ '</p>';
+        html = html + '<p><b>alpha3:</b> '+ x['alpha3']+ '</p>';
+        html = html + '<p><b>Currency:</b> '+x['currency']+ '</p>';
+        html = html + '<p><b>Phone Prefix:</b> '+x['prefix']+ '</p></div>';
         html = html + '</div>';
         return html;
     }
     $(document).ready( function(){
         $.getJSON('./build/countries.json', function(countries){
             $.each(countries, function(i, val){
-                console.log(val);
                 box = buildBox(val);
-                $('#list').append('<li>'+box+'</li>' );
+                $('#list').append(box);
             })
         })
 
     });
     </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     <style>
-    html, body{margin:0; padding:10; background: #efefef;}
-    #json { border: 1px solid black; width: 50%; background: #f5f5f5;}
-    #list { list-style-type: none; }
-    #list .box {width: 300px; border: 1px solid black; color: white; margin: 4px; height:220px; background: #333; float:left; display:block;}
-    #list .box .name{ background: black; color: white; text-align:center; font-size: 1.8vw !important; padding: 4px; width: 290px !important;}
-    #list .box .row { display: block; float: left; padding:5px; width:290px; font-size: .9em;}
-    #list .box img { height: 60px; float:left; margin-right: 4px; border:1px solid white;}
-    #list .box div {float:left;}
-    #list .box b {width:60px; font-weight: bold;}
+    html, body{background: #eee; }
+    pre { background: #333; color: #fff; margin:10px;}
+    pre span{color: orange;}
+    .box img{width:120px; float:left; display: block; margin-right: 4px;}
     </style>
 </head>
 
 <body>
     <a href="https://github.com/pnicorelli/countries"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-    <h1>Countries and standards</h1>
-    Countries standards like ISO3166, flags (png, svg in 4x3 and 1x1), phone prefix and currency codes packed in a JSON... something like:<br>
-    <div id="json">
-    <pre style="color:#000000;">
-        <span style="color:#0000e6; ">[</span>
-        <span style="color:#0000e6; ">&nbsp;&nbsp;&nbsp;&nbsp;...</span>
-        <span style="color:#0000e6; ">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
-            <span style="color:#0000e6; ">"name"</span><span style="color:#808030; ">:</span> "Tuvalu"<span style="color:#808030; ">,</span>
-            <span style="color:#0000e6; ">"prefix"</span><span style="color:#808030; ">:</span> "688"<span style="color:#808030; ">,</span>
-            <span style="color:#0000e6; ">"currency"</span><span style="color:#808030; ">:</span> "Australian Dollar"<span style="color:#808030; ">,</span>
-            <span style="color:#0000e6; ">"alpha2"</span><span style="color:#808030; ">:</span> "TV"<span style="color:#808030; ">,</span>
-            <span style="color:#0000e6; ">"alpha3"</span><span style="color:#808030; ">:</span> "TUV"<span style="color:#808030; ">,</span>
-            <span style="color:#0000e6; ">"images"</span><span style="color:#808030; ">:</span> <span style="color:#808030; ">{</span>
-                <span style="color:#0000e6; ">"svg_square"</span><span style="color:#808030; ">:</span> "<span style="color:#808030; ">.</span><span style="color:#808030; ">/</span>build<span style="color:#808030; ">/</span>flags<span style="color:#808030; ">/</span>svg<span style="color:#808030; ">/</span>1x1<span style="color:#808030; ">/</span>tv<span style="color:#808030; ">.</span>svg"<span style="color:#808030; ">,</span>
-                <span style="color:#0000e6; ">"svg"</span><span style="color:#808030; ">:</span> "<span style="color:#808030; ">.</span><span style="color:#808030; ">/</span>build<span style="color:#808030; ">/</span>flags<span style="color:#808030; ">/</span>svg<span style="color:#808030; ">/</span>4x3<span style="color:#808030; ">/</span>tv<span style="color:#808030; ">.</span>svg"<span style="color:#808030; ">,</span>
-                <span style="color:#0000e6; ">"png_square"</span><span style="color:#808030; ">:</span> "<span style="color:#808030; ">.</span><span style="color:#808030; ">/</span>build<span style="color:#808030; ">/</span>flags<span style="color:#808030; ">/</span>png<span style="color:#808030; ">/</span>1x1<span style="color:#808030; ">/</span>tv<span style="color:#808030; ">.</span>png"<span style="color:#808030; ">,</span>
-                <span style="color:#0000e6; ">"png"</span><span style="color:#808030; ">:</span> "<span style="color:#808030; ">.</span><span style="color:#808030; ">/</span>build<span style="color:#808030; ">/</span>flags<span style="color:#808030; ">/</span>png<span style="color:#808030; ">/</span>4x3<span style="color:#808030; ">/</span>tv<span style="color:#808030; ">.</span>png"
-    <span style="color:#0000e6; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
-    <span style="color:#0000e6; ">&nbsp;&nbsp;&nbsp;&nbsp;},</span>
-    <span style="color:#0000e6; ">&nbsp;&nbsp;&nbsp;&nbsp;...</span>
-    <span style="color:#0000e6; ">]</span>
-    </pre>
+    <div class="page-header">
+        <h1>Countries and standards</h1>
     </div>
 
-    <br>download <a href="./build/pack.tar.bz2" target="_blank">the current package</a> (~11MB of tar.bz2)
-    <br>read more on <a href="https://github.com/pnicorelli/countries">github repo</a>
-    <br>
-    <br>
-    <br>
-    <h3>Example: Countries badge autogenerated from package</h3>
-    <ul id="list">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                Countries standards like ISO3166, flags (png, svg in 4x3 and 1x1), phone prefix and currency codes packed in a JSON... something like:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
 
-    </ul>
-    <body>
-        </html>
+<pre>
+    [
+    ...
+    {
+        <span>"name"</span>: "Tuvalu",
+        <span>"prefix"</span>: "688",
+        <span>"currency"</span>: "Australian Dollar",
+        <span>"alpha2"</span>: "TV",
+        <span>"alpha3"</span>: "TUV",
+        <span>"images"</span>: {
+            <span>"svg_square"</span>: "./build/flags/svg/1x1/tv.svg",
+            <span>"svg"</span>: "./build/flags/svg/4x3/tv.svg",
+            <span>"png_square"</span>: "./build/flags/png/1x1/tv.png",
+            <span>"png"</span>: "./build/flags/png/4x3/tv.png"
+        }
+    },
+    ...
+    ]
+</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+                <ul class="list-group">
+                    <li class="list-group-item">download <a href="./build/pack.tar.bz2" target="_blank">the current package</a> (~11MB of tar.bz2)</li>
+                    <li class="list-group-item">read more on <a href="https://github.com/pnicorelli/countries">github repo</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+                <h3>Example: Countries badge autogenerated from package</h3>
+
+            </div>
+        </div>
+        <div class="row">
+            <div  class="col-md-4 col-md-offset-1" id="list">
+
+            </div>
+        </div>
+
+    </div>
+
+
+<body>
+</html>
